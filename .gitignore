@@ -1,0 +1,4 @@
+.idea/
+_pycache__/
+db.sqlite3
+*.py[cod]
