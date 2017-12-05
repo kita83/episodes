@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>episodes - {% block title %}{% endblock %}</title>
+</head>
+
+<body>
+{% block header %}
+  <div class="header">
+    <div class="wrapper">
+      <a href="{% url 'feed:index' %}">FuuM</a>
+      <div class="header-nav">
+        <a href="{% url 'account_logout' %}">ログアウト</a>
+        <a href="{% url 'account_login' %}">ログイン</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+<div class="wrapper">
+  {% block content %}
+  {% endblock %}
+</div>
+</body>
+</html>

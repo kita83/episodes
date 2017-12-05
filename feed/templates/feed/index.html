@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}トレンド一覧{% endblock %}
+
+{% block content %}
+  <h1>最新トレンド</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>エピソードタイトル</th>
+      <th>チャンネル</th>
+      <th>収録者</th>
+      <th>リリース</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for feed in feeds %}
+      <tr>
+        <td>{{ feed.name }}</td>
+        <td>{{ feed.title.label }}</td>
+        <td>{{ feed.artistName.label }}</td>
+        <td>{{ feed.releaseDate.attributes.label }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>情報が取得できませんでした</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

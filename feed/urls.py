@@ -3,9 +3,9 @@ from django.conf.urls import url
 
 from . import views
 
-app_name = 'oauth'
+app_name = 'feed'
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'$', views.index, name='index'),
     url(r'^login/$', django.contrib.auth.views.login, {'template_name': 'login.html'}, name='login'),
-    url(r'^logout/$', django.contrib.auth.views.login, {'template_name': 'logout.html'}, name='logout'),
+    url(r'^logout/$', django.contrib.auth.views.logout, {'template_name': 'logout.html'}, name='logout'),
 ]
