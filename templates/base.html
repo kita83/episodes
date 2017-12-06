@@ -11,8 +11,12 @@
     <div class="wrapper">
       <a href="{% url 'feed:index' %}">episodes</a>
       <div class="header-nav">
-        <a href="{% url 'account_logout' %}">ログアウト</a>
-        <a href="{% url 'account_login' %}">ログイン</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'account_logout' %}">ログアウト</a>
+        {% else %}
+          <a href="{% url 'account_login' %}">ログイン</a>
+          <a href="{% url 'account_signup' %}">サインアップ</a>
+        {% endif %}
       </div>
     </div>
   </div>

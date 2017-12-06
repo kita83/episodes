@@ -1,4 +1,4 @@
-import django.contrib.auth.views
+from allauth import account
 from django.conf.urls import url
 
 from . import views
@@ -6,6 +6,7 @@ from . import views
 app_name = 'feed'
 urlpatterns = [
     url(r'$', views.index, name='index'),
-    url(r'^login/$', django.contrib.auth.views.login, {'template_name': 'login.html'}, name='login'),
-    url(r'^logout/$', django.contrib.auth.views.logout, {'template_name': 'logout.html'}, name='logout'),
+    url(r'^signup/?$', views.SignupView, name='signup'),
+    url(r'^login/$', views.LoginView, name='login'),
+    url(r'^logout/$', views.LogoutView, name='logout'),
 ]
