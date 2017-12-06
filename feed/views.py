@@ -56,4 +56,4 @@ class SignupView(views.SignupView):
         return context
 
 
-signup_view = SignupView.as_view()
+signup = SignupView.as_view()
