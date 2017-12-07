@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^feed/', include('feed.urls')),
+    url(r'^$', include('feed.urls')),
 ]
 
 if settings.DEBUG:

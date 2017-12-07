@@ -143,6 +143,7 @@ SITE_ID = 1
 LOGIN_URL = 'feed:login/'
 LOGIN_REDIRECT_URL = '/feed/'
 
+# django-debug-toolbar の設定
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.versions.VersionsPanel',
     'debug_toolbar.panels.timer.TimerPanel',
