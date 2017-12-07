@@ -23,6 +23,7 @@ def index(request):
 
 class LoginView(views.LoginView):
     template_name = 'feed/login.html'
+    ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
     def dispatch(self, request, *args, **kwargs):
         response = super(LoginView, self).dispatch(request, *args, **kwargs)
@@ -50,6 +51,7 @@ logout = LogoutView.as_view()
 
 class SignupView(views.SignupView):
     template_name = 'feed/signup.html'
+    ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
     def get_context_data(self, **kwargs):
         context = super(SignupView, self).get_context_data(**kwargs)
