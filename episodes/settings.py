@@ -142,6 +142,8 @@ SITE_ID = 1
 
 LOGIN_URL = 'feed:login/'
 LOGIN_REDIRECT_URL = '/feed/'
+# django-allauth でSMTPサーバー認証を不要にする
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 
 # django-debug-toolbar の設定
 DEBUG_TOOLBAR_PANELS = (
