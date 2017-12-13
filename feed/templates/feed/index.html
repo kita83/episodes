@@ -23,10 +23,10 @@
               <tbody>
               {% for feed in feeds %}
                 <tr>
-                  <td>{{ feed.name }}</td>
-                  <td>{{ feed.title.label }}</td>
-                  <td>{{ feed.artistName.label }}</td>
-                  <td>{{ feed.releaseDate.attributes.label }}</td>
+                  <td>{{ feed.title }}</td>
+                  <td>{{ feed.channel }}</td>
+                  <td>{{ feed.author }}</td>
+                  <td>{{ feed.released_at }}</td>
                 </tr>
               {% empty %}
                 <tr>
