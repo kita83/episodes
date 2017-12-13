@@ -35,8 +35,11 @@ def index(request):
             'released_at': released_at
         }
         feeds.append(tmp)
+
+    # debug
     pp = pprint.PrettyPrinter(indent=4)
     pp.pprint(feeds)
+
     context = {
         'feeds': feeds
     }
@@ -45,6 +48,9 @@ def index(request):
 
 
 class LoginView(views.LoginView):
+    """
+    ログインページへ遷移
+    """
     template_name = 'feed/login.html'
     ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
@@ -60,6 +66,9 @@ login = LoginView.as_view()
 
 
 class LogoutView(views.LogoutView):
+    """
+    ログアウトページへ遷移
+    """
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
 
@@ -73,6 +82,9 @@ logout = LogoutView.as_view()
 
 
 class SignupView(views.SignupView):
+    """
+    サインアップページへ遷移
+    """
     template_name = 'feed/signup.html'
     ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
