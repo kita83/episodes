@@ -17,19 +17,19 @@ class Category(TimeStampModel):
     """
     カテゴリ情報を保持する
     """
-    category_code = models.CharField(max_length=10)
-    category_name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.category_name
+        return self.name
 
 
 class Channel(TimeStampModel):
     """
     チャンネル情報を保持する
     """
-    category_id = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    cd = models.IntegerField(primary_key=True)
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=100)
     author_name = models.CharField(max_length=100)
     cover_image = models.ImageField(upload_to='images/', blank=True, null=True)
@@ -43,12 +43,68 @@ class Episode(TimeStampModel):
     """
     エピソード情報を保持する
     """
-    channel_id = models.ForeignKey(Channel, on_delete=models.PROTECT)
-    episode_title = models.CharField(max_length=200)
+    cd = models.IntegerField(primary_key=True)
+    channel = models.ForeignKey(Channel, on_delete=models.PROTECT)
+    title = models.CharField(max_length=200)
     link = models.URLField(max_length=200)
     summary = models.TextField(null=True, blank=True)
     release_date = models.DateTimeField()
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.episode_title
+        return self.title
+
+
+class Like(TimeStampModel):
+    """
+    Likeされたエピソードとユーザー情報を関連づける
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.episode
+
+class Stock(TimeStampModel):
+    """
+    Stockされたエピソードとユーザー情報を関連づける
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.episode
+
+
+class Follow(TimeStampModel):
+    """
+    Followされたエピソードとユーザー情報を関連づける
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.episode
+
+
+class MstTag(TimeStampModel):
+    """
+    タグのマスタ情報を保持する
+    """
+    name = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Tag(TimeStampModel):
+    """
+    タグ付けされたエピソードとユーザー情報を関連づける
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    mst_tag = models.ForeignKey(MstTag, on_delete=models.CASCADE)
+    episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.mst_tag
