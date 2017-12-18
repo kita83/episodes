@@ -143,8 +143,12 @@ SITE_ID = 1
 
 LOGIN_URL = 'feed:login/'
 LOGIN_REDIRECT_URL = '/feed/'
+
 # django-allauth でSMTPサーバー認証を不要にする
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
+# 継承したユーザークラスを定義
+AUTH_USER_MODEL = 'feed.EpisodeUser'
 
 # django-debug-toolbar の設定
 DEBUG_TOOLBAR_PANELS = (

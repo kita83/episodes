@@ -1,6 +1,15 @@
 """feedアプリのモデル"""
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+
+
+class EpisodeUser(AbstractUser):
+    """
+    ユーザー情報を保持する
+    """
+    pass
+
 
 class TimeStampModel(models.Model):
     """
@@ -29,7 +38,7 @@ class Channel(TimeStampModel):
     チャンネル情報を保持する
     """
     cd = models.IntegerField(primary_key=True)
-    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=100)
     author_name = models.CharField(max_length=100)
     cover_image = models.ImageField(upload_to='images/', blank=True, null=True)
@@ -59,7 +68,7 @@ class Like(TimeStampModel):
     """
     Likeされたエピソードとユーザー情報を関連づける
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -69,7 +78,7 @@ class Stock(TimeStampModel):
     """
     Stockされたエピソードとユーザー情報を関連づける
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -80,7 +89,7 @@ class Follow(TimeStampModel):
     """
     Followされたエピソードとユーザー情報を関連づける
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -102,7 +111,7 @@ class Tag(TimeStampModel):
     """
     タグ付けされたエピソードとユーザー情報を関連づける
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     mst_tag = models.ForeignKey(MstTag, on_delete=models.CASCADE)
     episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
 
