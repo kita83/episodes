@@ -1,14 +1,6 @@
 """feedアプリのモデル"""
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
-
-
-class EpisodeUser(AbstractUser):
-    """
-    ユーザー情報を保持する
-    """
-    pass
 
 
 class TimeStampModel(models.Model):
